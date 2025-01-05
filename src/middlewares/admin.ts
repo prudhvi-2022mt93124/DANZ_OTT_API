@@ -1,13 +1,17 @@
-import { Request, Response, NextFunction } from "express";
-let checkAdmin = function (req: Request, res: Response, next: NextFunction) {
-    if (req.headers.roleName !== "Admin") {
-        return res.status(401).send({
-            "message": "UnAuthorized",
-            "statusCode": "401",
-            "Success": "False"
-        })
+
+class Admin {
+    static async validateAdminUser(req: any, res: any, next: any) {
+        console.log(req.body);
+        console.log(req.headers);
+        if (req.headers.rolename != "Admin") {
+            return res.status(401).send({
+                "message": "UnAuthorized",
+                "statusCode": "401",
+                "Success": "False"
+            })
+        }
+        next();
     }
-    next();
 }
 
-export default checkAdmin;
+export default Admin;
